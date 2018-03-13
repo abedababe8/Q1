@@ -244,7 +244,7 @@ const itemData = [
     img.setAttribute('src', imgsrc)
     img.classList.add('img-fluid')
   }
-  const = document.querySelector('.order')
+  const orderSection = document.querySelector('.order')
   let subT = 0;
   let tax = 0;
   let totalT = 0;
