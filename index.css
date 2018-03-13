@@ -6,17 +6,19 @@ p {
 .header {
   width: 100%;
   height: 30px;
-  background: linear-gradient(#d9d9d9,#999999) ;
+  background: linear-gradient(#d9d9d9,#808080);
+  text-align: center;
 }
 .interactive {
   width: 100%;
   height: 90vh;
-  margin-left: 0px;
-  margin-right: 0px;
+  /* margin-left: 0px ;
+  margin-right: 0px ; */
 }
 
 .order {
   background: linear-gradient(to left, #e96443, #904e95);
+  padding-right: 0px;
 }
 
 .menu-container {
@@ -127,13 +129,25 @@ p {
 .separate {
   width: 100%;
   height: 30px;
-  background: linear-gradient(#999999, #d9d9d9) ;
+  background: linear-gradient(#808080, #d9d9d9);
+  text-align: center;
+  height: 35px; ;
 }
 
 
 .info{
   width: 100%;
-  height: 400px;
+}
+.descLeft {
+  background: linear-gradient(to bottom left, #4C0001, #070000, #070000)
+}
+.descMid {
+  justify-content: center;
+  background: linear-gradient(#4C0001, #070000)
+}
+
+.descRight {
+  background: linear-gradient(to bottom right, #4C0001, #070000, #070000)
 }
 .hide {
   display: none
@@ -144,6 +158,10 @@ p {
   background-color: grey;
   opacity: .8;
   position: absolute;
+}
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
 }
 @media only screen and (max-width: 1260px) {
   .top-btns {
