@@ -1,159 +1,6 @@
 // document.addEventListener('DOMContentLoaded', function(event){
-const myCart = []
 // console.log('hiya')
-const describedItem = []
-const itemData = [
-  { name: 'Penne Rigatta',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkDtIE2ZlT-XAnqWLFhhq9Zb7boPQxvHlRR_Wfv3TkjiWdxyQC',
-    desc: 'Whole Wheat Penne pasta with tomatoes and basil',
-    type: 'entree',
-    price: '9.50',
-    icon1: false,
-    icon2: true,
-    icon3: true,
-    icon4: false,
-  },
-  { name: 'Truffle Pasta',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMXBDjGURLnAiYoZ99_0plsyIKIJd2YCRvPHjVlPauPytoaG5Q1Q',
-    desc: 'Buttered Pasta with savory organic truffles',
-    type: 'entree',
-    price: '17.50',
-    icon1: false,
-    icon2: false,
-    icon3: true,
-    icon4: false,
-  },
-  { name: 'Steak Tips',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyupMobW6mp9DTxSxqC6QDviYUA4pWOcUb9u-m3bDpnYmDiP4D',
-    desc: 'Tri-tip quality steak with a house steak sauce',
-    type: 'entree',
-    price: '18.00',
-    icon1: true,
-    icon2: false,
-    icon3: false,
-    icon4: true,
-  },
-  { name: 'Chicken and Veggies',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO2wF9wpA2hNSqTr_7OTNnVzf3wOM4tlDjaPpoAeJ9GI7LMSeucA',
-    desc: 'Carved Rotisseried chicken marinated in a citrusy sauce then topped with onions, bell peppers and cilantro',
-    type: 'entree',
-    price:'8.50',
-    icon1: false,
-    icon2: false,
-    icon3: false,
-    icon4: true,
-  },
-  { name: 'Central Asian pan noodles',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5ZQ981lVKqrZTAW1R4mjXEOJ5YJ5YwIlpEPbBIYTVr1Kp3pIt1g',
-    desc: 'Thick rice noodles topped with broccoli and classic mongolian spices',
-    type: 'side',
-    price: '7.00',
-    icon1: true,
-    icon2: true,
-    icon3: true,
-    icon4: true,
-  },
-  { name:'Chinese dumplings',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx9L-TJT6QHPE3JKQrxMymf52WP6lxW-EkUcWOULo1mn_L0ppCQA',
-    desc:'Deliciously Doughy Dumplings stuffed with veggies and Pork',
-    type: 'appetizer',
-    price:'6.00',
-    icon1: true,
-    icon2: false,
-    icon3: false,
-    icon4: false,
-  },
-  { name:'Shrimp Bangaroos',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3w1zibq6O4vt5_B_-PEmk8KdGh_5YmGrQzXc7k5MUvkl4hRO1gA',
-    desc:'Fried coconut schrimp with house cocktail sauce',
-    type: 'side',
-    price:'7.50',
-    icon1: true,
-    icon2: false,
-    icon3: false,
-    icon4: false,
-  },
-  { name:"Devil's Chocolate Cake",
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMVo-OeRcXXk-d2F7ymofbRMHBJzrXx8izKbva15aWR0l9Sf1g7A',
-    desc:"With high cocoa percentage and a fruity, spicy finish, this Devil's cake will have you worshiping it in no time",
-    type: 'dessert',
-    price:'8.00',
-    icon1:true,
-    icon2:false,
-    icon3:true,
-    icon4:false,
-  },
-  { name:'Pomegranate Tofu Salad',
-    img: 'https://www.halfbakedharvest.com/wp-content/uploads/2018/01/Rejuvenating-Winter-Broccoli-Salad-1-500x500.jpg',
-    desc:'An excellent salad topped with market fresh blackberries and grilled tofu',
-    type: 'salad',
-    price:'11.00',
-    icon1:false,
-    icon2:true,
-    icon3:true,
-    icon4:true,
-  },
-  { name:'Seattle Style Sushi',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxUromC9Zu94XcgzZUQhGlMuScWxAVyUc3F6xgmj7O9FEgdcVjwA',
-    desc:'Tuna and Arbicore wrapped with mango and avocado',
-    type: 'entree',
-    price:'13.00',
-    icon1:false,
-    icon2:false,
-    icon3:false,
-    icon4:true,
-  },
-  { name:'Shrimp and brown Rice',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC7LZkkhQJubdBgpa5-nRasf2yGVeXxRl0hqmaoYHxkhmhi5Br',
-    desc:'Sauteed shrimp on a bed of brown rice with edamame and chili oil',
-    type: 'appetizer',
-    price:'7.50',
-    icon1:true,
-    icon2:false,
-    icon3:false,
-    icon4:true,
-  },
-  { name:'Pizzen',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFWX5kL5VeRcZK9XzI7Br0X-mHUDCyT0238m9tQtELIUjDr5Sj',
-    desc:"Everybody's Favorite round food available with just about every topping",
-    type: 'entree',
-    price:'14.00',
-    icon1:true,
-    icon2:false,
-    icon3:false,
-    icon4:false,
-  },
-  { name:'Sushi Platter',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyWXP0l8J7d_NcfNl0TvBe3GRF3OOjYE14eyYZ-HELzRIcWgEijA',
-    desc:"A 'flight' of sushi with California rolls, Philadelphia Rolls, Unagi Rolls and Seattle Style rolls",
-    type: 'appetizer',
-    price:'18.00',
-    icon1:true,
-    icon2:false,
-    icon3:false,
-    icon4:true,
-  },
-  { name:'Warm Lentil Salad with Poached Egg',
-    img: 'https://static01.nyt.com/images/2017/05/09/dining/09SALADGUIDE9/09SALADGUIDE9-articleLarge.jpg',
-    desc:'A Paleo diet salad with nuts, lentils and herbs topped with a poached egg',
-    type: 'salad',
-    price:'9.50',
-    icon1: false,
-    icon2: true,
-    icon3: true,
-    icon4: true,
-  },
-  { name:'House Special',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV_lAvZJF2jXxrueZyF7ac5ENnonh_5xg59m9hJ3jZempvNQI5',
-    desc:'A tower of deliciousness containing shrimp, kale, flatiron steak and a secret sauce',
-    type: 'entree',
-    price:'13.00',
-    icon1: true,
-    icon2: false,
-    icon3: false,
-    icon4: true,
-  },
-]
+// const describedItem = []
 
   const header = document.querySelector('.header')
   const headerText = document.createElement('p')
@@ -215,69 +62,6 @@ const itemData = [
   menuContainer.appendChild(menuCol2)
   menuCol2.classList.add('col-11')
 
-
-
-  function createVeil() {
-    const veil = document.createElement('div')
-    veil.classList.add('veil', 'hide')
-    return veil
-  }
-  function createName(name) {
-    const nameEle = document.createElement('p')
-    nameEle.innerHTML = name
-    return nameEle
-  }
-  function createPrice(price) {
-    const priceEle = document.createElement('p')
-    priceEle.innerHTML = price
-    return priceEle
-  }
-  function createType(type) {
-    const typeEle = document.createElement('p')
-    typeEle.innerHTML = type
-    return typeEle
-  }
-  function createDesc(desc) {
-    const descEle = document.createElement('p')
-    descEle.innerHTML = desc
-    return descEle
-  }
-  function addIconCont() {
-    const iconCont = document.createElement('div')
-    iconCont.style.display = 'flex'
-    return iconCont
-  }
-  function addIcon1(icon1) {
-    const icon1Ele = document.createElement('div')
-    icon1Ele.innerHTML = icon1
-    icon1Ele.style.color = '#dc3545'
-    return icon1Ele
-  }
-  function addIcon2(icon2) {
-    const icon2Ele = document.createElement('div')
-    icon2Ele.innerHTML = icon2
-    icon2Ele.style.color = '#17a2b8'
-    return icon2Ele
-  }
-  function addIcon3(icon3) {
-    const icon3Ele = document.createElement('div')
-    icon3Ele.innerHTML = icon3
-    icon3Ele.style.color = '#28a745'
-    return icon3Ele
-  }
-  function addIcon4(icon4) {
-    const icon4Ele = document.createElement('div')
-    icon4Ele.innerHTML = icon4
-    icon4Ele.style.color = '#ffc107'
-    return icon4Ele
-  }
-  function addImg(imgsrc) {
-    const img = document.createElement('img')
-    img.setAttribute('src', imgsrc)
-    // img.classList.add('img-fluid')
-    // img.style.width = '100%'
-    return img
-  }
   const orderSection = document.querySelector('.order')
   let subT = 0;
   let tax = 0;
@@ -306,6 +90,7 @@ const itemData = [
     // iconHolder.style.justifyContent = 'right'
     // iconHolder.style.textAlign = 'right'
     div.classList.add('menuItem')
+    div.id = `menu-item-${menuItemIndex}`
     div.appendChild(createName(ele.name))
     div.appendChild(createPrice(ele.price))
     div.appendChild(iconHolder)
@@ -322,55 +107,74 @@ const itemData = [
       iconHolder.appendChild(addIcon4('<i class="fab fa-pagelines wheat"></i>'))
     }
     allButton.addEventListener('click', function(event){
+      ele.hidden = false
       div.firstChild.classList.add('hide')
     })
     flameButton.addEventListener("click", function(event){
+      ele.hidden = false
       if (ele.icon1 !== true) {
+        ele.hidden = true
         div.firstChild.classList.remove('hide')
       }
     })
     veganButton.addEventListener("click", function(event){
+      ele.hidden = false
       if (ele.icon2 !== true ) {
+        ele.hidden = true
         div.firstChild.classList.remove('hide')
       }
     })
     vegButton.addEventListener("click", function(event){
+      ele.hidden = false
       if (ele.icon3 !== true ) {
+        ele.hidden = true
         div.firstChild.classList.remove('hide')
       }
     })
     gfButton.addEventListener("click", function(event){
+      ele.hidden = false
       if (ele.icon4 !== true ) {
-        div.firstChild.classList.remove('hide')
+        ele.hidden = true
+          div.firstChild.classList.remove('hide')
       }
     })
     entreeButton.addEventListener('click', function(){
+      ele.hidden = false
       div.firstChild.classList.add('hide')
       if (ele.type !== 'entree') {
+        ele.hidden = true
         div.firstChild.classList.remove('hide')
       }
     })
     appButton.addEventListener('click', function(){
+      ele.hidden = false
       div.firstChild.classList.add('hide')
       if (ele.type !== 'appetizer') {
+        ele.hidden = true
         div.firstChild.classList.remove('hide')
       }
     })
     dessertButton.addEventListener('click', function(){
+      ele.hidden = false
       div.firstChild.classList.add('hide')
       if (ele.type !== 'dessert') {
+        ele.hidden = true
         div.firstChild.classList.remove('hide')
       }
     })
     saladButton.addEventListener('click', function(){
+      ele.hidden = false
       div.firstChild.classList.add('hide')
       if (ele.type !== 'salad') {
+        ele.hidden = true
         div.firstChild.classList.remove('hide')
       }
     })
     sideButton.addEventListener('click', function(){
+      ele.hidden = false
       div.firstChild.classList.add('hide')
       if (ele.type !== 'side') {
+        ele.hidden = true
         div.firstChild.classList.remove('hide')
       }
     })
@@ -385,7 +189,7 @@ const itemData = [
       orderSection.append(renderCart(myCart))
     })
     div.addEventListener('click', function(event){
-      describedItem.push({name:ele.name, img: ele.img, desc: ele.desc, type: ele.type, price:ele.price})
+      const element = {id:menuItemIndex, name:ele.name, img: ele.img, desc: ele.desc, type: ele.type, price:ele.price}
       descMid.innerHTML = ''
       descMid.style.textAlign = 'center'
       descMid.style.color = '#e6e6e6'
@@ -393,54 +197,17 @@ const itemData = [
 
       descLeft.innerHTML = ''
       descLeft.style.textAlign = 'right'
-      const descLeftButton = document.createElement('a')
-      descLeftButton.classList.add('btn', 'btn-outline-dark', 'full')
-      descLeftButton.style.marginTop = '100px'
-      const arrow = document.createElement('i')
-      arrow.classList.add("fas", "fa-angle-left")
-      arrow.style.height = '100%'
-      descLeftButton.appendChild(arrow)
-      descLeft.appendChild(descLeftButton)
-
-      descLeftButton.addEventListener('click', function (event) {
-        console.log(ele, menuItemIndex)
-      })
+      descLeft.appendChild(leftButton())
 
       descRight.innerHTML = ''
-      const descRightButton = document.createElement('a')
-      descRightButton.classList.add('btn', 'btn-outline-dark', 'full')
-      descRightButton.style.marginTop = '100px'
       descRight.style.textAlign = 'left'
-      const arrow2 = document.createElement('i')
-      arrow2.classList.add("fas", "fa-angle-right")
-      arrow2.style.height = '100%'
-      descRightButton.appendChild(arrow2)
-      descRight.appendChild(descRightButton)
-      descMid.append(makeDescribedItem(describedItem))
+      descRight.appendChild(rightButton())
+
+      descMid.append(makeDescribedItem(element))
 
     })
-    function makeDescribedItem(describedItem){
-      const wideItem = document.createElement('div')
-      wideItem.style.width = '100%'
-      wideItem.appendChild(addImg(ele.img))
-      wideItem.appendChild(createName(ele.name))
-      wideItem.appendChild(createPrice(ele.price))
-      wideItem.appendChild(createType(ele.type))
-      wideItem.appendChild(createDesc(ele.desc))
-      if (ele.icon1 === true) {
-        wideItem.appendChild(addIcon1('<i class="fas fa-fire flame"></i>'))
-      }
-      if (ele.icon2 === true) {
-        wideItem.appendChild(addIcon2('<i class="fab fa-vuejs vee"></i>'))
-      }
-      if (ele.icon3 === true) {
-        wideItem.appendChild(addIcon3('<i class="fas fa-leaf leaf"></i>'))
-      }
-      if (ele.icon4 === true) {
-        wideItem.appendChild(addIcon4('<i class="fab fa-pagelines wheat"></i>'))
-      }
-      return wideItem
-    }
+
+
     return div
   })
   flameButton.addEventListener("click", function(event){
@@ -546,6 +313,29 @@ function renderCart(myCart){
   return cart
 }
 
-
+function makeDescribedItem(item){
+  const wideItem = document.createElement('div')
+  wideItem.setAttribute('data-id', item.id)
+  wideItem.classList.add('current')
+  wideItem.style.width = '100%'
+  wideItem.appendChild(addImg(item.img))
+  wideItem.appendChild(createName(item.name))
+  wideItem.appendChild(createPrice(item.price))
+  wideItem.appendChild(createType(item.type))
+  wideItem.appendChild(createDesc(item.desc))
+  if (item.icon1 === true) {
+    wideItem.appendChild(addIcon1('<i class="fas fa-fire flame"></i>'))
+  }
+  if (item.icon2 === true) {
+    wideItem.appendChild(addIcon2('<i class="fab fa-vuejs vee"></i>'))
+  }
+  if (item.icon3 === true) {
+    wideItem.appendChild(addIcon3('<i class="fas fa-leaf leaf"></i>'))
+  }
+  if (item.icon4 === true) {
+    wideItem.appendChild(addIcon4('<i class="fab fa-pagelines wheat"></i>'))
+  }
+  return wideItem
+}
 
 // })
