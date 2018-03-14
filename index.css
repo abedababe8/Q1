@@ -19,6 +19,8 @@ p {
 .order {
   background: linear-gradient(to left, #e96443, #904e95);
   padding-right: 0px;
+  /* position: absolute;
+  left: 0 */
 }
 
 .menu-container {

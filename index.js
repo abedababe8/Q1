@@ -43,7 +43,7 @@ const itemData = [
     icon3: false,
     icon4: true,
   },
-  { name: 'Chinese style pan noodles',
+  { name: 'Central Asian pan noodles',
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5ZQ981lVKqrZTAW1R4mjXEOJ5YJ5YwIlpEPbBIYTVr1Kp3pIt1g',
     desc: 'Thick rice noodles topped with broccoli and classic mongolian spices',
     type: 'side',
@@ -171,6 +171,7 @@ const itemData = [
   const order = document.querySelector('.order')
   const descMid = document.querySelector('.descMid')
   const descLeft = document.querySelector('.descLeft')
+  const descRight = document.querySelector('.descRight')
 //Column 1 setup and interactivity
   const menuCol1 = document.createElement('div')
   menuContainer.appendChild(menuCol1)
@@ -183,6 +184,15 @@ const itemData = [
   arrow.classList.add("fas", "fa-angle-left")
   orderToggle.appendChild(arrow)
   // toggle order div
+  // $('.right').click(function(){
+  //   $('.menu-container').toggleClass( 'col-7' )
+  //   $('.menu-container').toggleClass( 'col-10' )
+  //   console.log($('.right')[0].firstChild)
+  //   $('.right')[0].firstChild.toggleClass('fa-angle-left')
+  //   $('.right')[0].firstChild.toggleClass('fa-angle-right')
+  //   });
+
+
   orderToggle.addEventListener('click', function(event){
     const firstChild = event.target.querySelector('.fa-angle-left, .fa-angle-right')
     if(firstChild.classList.contains('fa-angle-left')){
@@ -286,7 +296,7 @@ const itemData = [
   const saladButton = document.querySelector('.salad')
   const sideButton = document.querySelector('.side')
 
-  const uniqueItem = itemData.map(ele => {
+  const uniqueItem = itemData.map((ele, menuItemIndex) => {
     const div = document.createElement('div')
     div.appendChild(createVeil())
     const iconHolder = addIconCont()
@@ -335,26 +345,31 @@ const itemData = [
       }
     })
     entreeButton.addEventListener('click', function(){
+      div.firstChild.classList.add('hide')
       if (ele.type !== 'entree') {
         div.firstChild.classList.remove('hide')
       }
     })
     appButton.addEventListener('click', function(){
+      div.firstChild.classList.add('hide')
       if (ele.type !== 'appetizer') {
         div.firstChild.classList.remove('hide')
       }
     })
     dessertButton.addEventListener('click', function(){
+      div.firstChild.classList.add('hide')
       if (ele.type !== 'dessert') {
         div.firstChild.classList.remove('hide')
       }
     })
     saladButton.addEventListener('click', function(){
+      div.firstChild.classList.add('hide')
       if (ele.type !== 'salad') {
         div.firstChild.classList.remove('hide')
       }
     })
     sideButton.addEventListener('click', function(){
+      div.firstChild.classList.add('hide')
       if (ele.type !== 'side') {
         div.firstChild.classList.remove('hide')
       }
@@ -375,6 +390,32 @@ const itemData = [
       descMid.style.textAlign = 'center'
       descMid.style.color = '#e6e6e6'
       descMid.style.paddingTop = '20px'
+
+      descLeft.innerHTML = ''
+      descLeft.style.textAlign = 'right'
+      const descLeftButton = document.createElement('a')
+      descLeftButton.classList.add('btn', 'btn-outline-dark', 'full')
+      descLeftButton.style.marginTop = '100px'
+      const arrow = document.createElement('i')
+      arrow.classList.add("fas", "fa-angle-left")
+      arrow.style.height = '100%'
+      descLeftButton.appendChild(arrow)
+      descLeft.appendChild(descLeftButton)
+
+      descLeftButton.addEventListener('click', function (event) {
+        console.log(ele, menuItemIndex)
+      })
+
+      descRight.innerHTML = ''
+      const descRightButton = document.createElement('a')
+      descRightButton.classList.add('btn', 'btn-outline-dark', 'full')
+      descRightButton.style.marginTop = '100px'
+      descRight.style.textAlign = 'left'
+      const arrow2 = document.createElement('i')
+      arrow2.classList.add("fas", "fa-angle-right")
+      arrow2.style.height = '100%'
+      descRightButton.appendChild(arrow2)
+      descRight.appendChild(descRightButton)
       descMid.append(makeDescribedItem(describedItem))
 
     })
