@@ -26,6 +26,9 @@ function createDesc(desc) {
 function addIconCont() {
   const iconCont = document.createElement('div')
   iconCont.style.display = 'flex'
+  iconCont.style.position = 'absolute'
+  iconCont.style.bottom = '0'
+  iconCont.style.right = '2.5px'
   return iconCont
 }
 function addIcon1(icon1) {

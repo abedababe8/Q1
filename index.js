@@ -1,94 +1,166 @@
-// document.addEventListener('DOMContentLoaded', function(event){
-// console.log('hiya')
-// const describedItem = []
+// document.addEventListener('DOMContentLoaded', function(){
+const menuContainer = document.querySelector('.menu-container')
+const orderSection = document.querySelector('.orderSection')
+const order = document.querySelector('.order')
+orderSection.appendChild(order)
+const orderFavoriteForm = document.querySelector('.orderFavoriteForm')
+orderFavoriteInput = document.querySelector('.orderFavoriteInput')
+orderFavoriteForm.appendChild(orderFavoriteInput)
+orderSection.appendChild(orderFavoriteForm)
+const orderButtons = document.querySelector('.orderButtons')
+const clearOrder = document.querySelector('.clear')
+const favoriteOrder = document.querySelector('.star')
+const submitFavorite = document.querySelector('.submit')
+const favorites = document.querySelector('.favorites')
 
+const favoriteBtnHolder = document.createElement('div')
+favoriteBtnHolder.classList.add('hide', 'favoriteBtnHolder')
+favoriteBtnHolder.style.width = '100%'
+
+
+let subT = 0;
+let tax = 0;
+let totalT = 0;
+const descMid = document.querySelector('.descMid')
+const descLeft = document.querySelector('.descLeft')
+const descRight = document.querySelector('.descRight')
+//top button selection
+const flameButton = document.querySelector('.btn-outline-danger')
+const veganButton = document.querySelector('.btn-outline-info')
+const vegButton = document.querySelector('.btn-outline-success')
+const gfButton = document.querySelector('.btn-outline-warning')
+//bottom button selection
+const allButton = document.querySelector('.all')
+const entreeButton = document.querySelector('.entree')
+const appButton = document.querySelector('.app')
+const dessertButton = document.querySelector('.dessert')
+const saladButton = document.querySelector('.salad')
+const sideButton = document.querySelector('.side')
+//Column 1 setup and interactivity
+const menuCol1 = document.createElement('div')
+menuContainer.appendChild(menuCol1)
+menuCol1.classList.add('col-1')
+// create half-cricle and arrow
+const orderToggle = document.createElement('div')
+menuCol1.appendChild(orderToggle)
+orderToggle.classList.add('right')
+const arrow = document.createElement('i')
+arrow.classList.add("fas", "fa-angle-left")
+orderToggle.appendChild(arrow)
+
+
+let storedFavorites = JSON.parse(localStorage.getItem('storedFavorites')) || []
+let currentOrder = JSON.parse(localStorage.getItem('currentOrder')) || []
+for (var i = 0; i < currentOrder.length; i++){
+myCart.push(currentOrder[i])
+}
+order.appendChild(renderCart(myCart))
+// });
+let currentFavorite = false
+// header setup and instructions
   const header = document.querySelector('.header')
   const headerText = document.createElement('p')
   header.appendChild(headerText)
   headerText.style.fontFamily = "'Rozha One', serif"
   headerText.innerHTML = 'Click once to see Item Description and Double click to add to order!'
+// separate setup and instructions
   const separate = document.querySelector('.separate')
   const separateText = document.createElement('p')
   separate.appendChild(separateText)
   separateText.style.fontFamily = "'Rozha One', serif"
   separateText.innerHTML = '<i class="fas fa-fire flame"></i> = Spicy,  <i class="fab fa-vuejs vee"></i> = Vegan,  <i class="fas fa-leaf leaf"></i> = Vegetarian,  <i class="fab fa-pagelines wheat"></i> = Gluten Free'
 
+//basic page setup
 
-  const menuContainer = document.querySelector('.menu-container')
-  const order = document.querySelector('.order')
-  const descMid = document.querySelector('.descMid')
-  const descLeft = document.querySelector('.descLeft')
-  const descRight = document.querySelector('.descRight')
-//Column 1 setup and interactivity
-  const menuCol1 = document.createElement('div')
-  menuContainer.appendChild(menuCol1)
-  menuCol1.classList.add('col-1')
-// create half-cricle and arrow
-  const orderToggle = document.createElement('div')
-  menuCol1.appendChild(orderToggle)
-  orderToggle.classList.add('right')
-  const arrow = document.createElement('i')
-  arrow.classList.add("fas", "fa-angle-left")
-  orderToggle.appendChild(arrow)
-  // toggle order div
-  // $('.right').click(function(){
-  //   $('.menu-container').toggleClass( 'col-7' )
-  //   $('.menu-container').toggleClass( 'col-10' )
-  //   console.log($('.right')[0].firstChild)
-  //   $('.right')[0].firstChild.toggleClass('fa-angle-left')
-  //   $('.right')[0].firstChild.toggleClass('fa-angle-right')
-  //   });
+  clearOrder.addEventListener('click', function(event){
+    myCart.splice(0)
+    order.innerHTML = ''
+    localStorage.removeItem('currentOrder');
+  })
+  favoriteOrder.addEventListener('click', function(event){
+    favoriteOrder.classList.add('hide')
+    submitFavorite.classList.remove('hide')
+    orderFavoriteForm.classList.remove('hide')
+    orderFavoriteInput.classList.remove('hide')
+    orderFavoriteInput.value = ''
+  })
+  submitFavorite.addEventListener('click', function(event){
+    event.preventDefault()
+    let currentSelcectedFavorite = {}
+    const newCart = myCart.slice()
+    console.log(currentSelcectedFavorite)
+        currentSelcectedFavorite.title = orderFavoriteInput.value
+        currentSelcectedFavorite.items = newCart
+        storedFavorites.push(currentSelcectedFavorite)
+        console.log(storedFavorites)
+        localStorage.setItem('storedFavorites', JSON.stringify(storedFavorites))
 
+        favoriteOrder.classList.remove('hide')
+        submitFavorite.classList.add('hide')
+        orderFavoriteForm.classList.add('hide')
+          orderFavoriteInput.classList.add('hide')
+  })
 
-  orderToggle.addEventListener('click', function(event){
-    const firstChild = event.target.querySelector('.fa-angle-left, .fa-angle-right')
-    if(firstChild.classList.contains('fa-angle-left')){
-      order.classList.add('hide')
-      menuContainer.classList.remove('col-7')
-      menuContainer.classList.add('col-10')
-      firstChild.classList.remove('fa-angle-left')
-      firstChild.classList.add('fa-angle-right')
-    }
-    else if(firstChild.classList.contains('fa-angle-right')){
-      order.classList.remove('hide')
-      menuContainer.classList.remove('col-10')
-      menuContainer.classList.add('col-7')
-      firstChild.classList.remove('fa-angle-right')
-      firstChild.classList.add('fa-angle-left')
+  favorites.addEventListener('click', function(){
+    descMid.innerHTML = ''
+    descMid.style.textAlign = 'center'
+    descMid.style.color = '#e6e6e6'
+    descMid.style.paddingTop = '20px'
+    descLeft.innerHTML = ''
+    descRight.innerHTML = ''
+    favoriteBtnHolder.innerHTML = ''
+    descMid.appendChild(favoriteBtnHolder)
+    favoriteBtnHolder.classList.remove('hide')
+    for (var numOfSaved = 0; numOfSaved < storedFavorites.length; numOfSaved++){
+      const favoriteBtn = document.createElement('a')
+      favoriteBtn.classList.add('favoriteButton', 'row', 'btn', 'btn-outline-dark', 'full')
+      favoriteBtn.style.width = '100%'
+      favoriteBtn.setAttribute('href', '#')
+      favoriteBtn.setAttribute('role', 'button')
+      favoriteBtn.innerHTML = `${storedFavorites[numOfSaved].title}`
+      favoriteBtnHolder.appendChild(favoriteBtn)
+      favoriteBtn.addEventListener('click', function(event){
+        for (var savedFavorite = 0; savedFavorite < storedFavorites.length; savedFavorite++){
+            console.log(event.target.innerHTML)
+            console.log(savedFavorite)
+            console.log(storedFavorites[savedFavorite].title)
+            console.log(storedFavorites.length)
+
+          if (storedFavorites[savedFavorite].title === event.target.innerHTML){
+            console.log('ooboob')
+            order.innerHTML = ''
+            order.appendChild(renderCart(storedFavorites[savedFavorite].items))
+          }
+        }
+      })
     }
   })
+
+
+  // toggle order div
+  $('.right').click(function(){
+    // $('.menu-container').toggle("slide")
+    $('.menu-container').toggleClass('col-10 col-7')
+    // $('.menu-container').toggleClass()
+    $('.order').toggleClass('hide')
+    $('.orderFavoriteForm').toggleClass('hide')
+    $('.orderFavoriteInput').toggleClass('hide')
+    $('.orderButtons').toggleClass('hide')
+    $('.orderSection').toggleClass("col-3 col-0")
+    const test = $($('.right')[0].firstChild)
+    test.toggleClass('fa-angle-left')
+    test.toggleClass('fa-angle-right')
+    });
 //Column 2 setup and interactivity
   const menuCol2 = document.createElement('div')
   menuContainer.appendChild(menuCol2)
   menuCol2.classList.add('col-11')
 
-  const orderSection = document.querySelector('.order')
-  let subT = 0;
-  let tax = 0;
-  let totalT = 0;
-
-  const allButton = document.querySelector('.all')
-
-  const flameButton = document.querySelector('.btn-outline-danger')
-  const veganButton = document.querySelector('.btn-outline-info')
-  const vegButton = document.querySelector('.btn-outline-success')
-  const gfButton = document.querySelector('.btn-outline-warning')
-
-  const entreeButton = document.querySelector('.entree')
-  const appButton = document.querySelector('.app')
-  const dessertButton = document.querySelector('.dessert')
-  const saladButton = document.querySelector('.salad')
-  const sideButton = document.querySelector('.side')
-
+//create unique items within the menu
   const uniqueItem = itemData.map((ele, menuItemIndex) => {
     const div = document.createElement('div')
     div.appendChild(createVeil())
     const iconHolder = addIconCont()
-    iconHolder.style.position = 'absolute'
-    iconHolder.style.bottom = '0'
-    iconHolder.style.right = '2.5px'
-    // iconHolder.style.justifyContent = 'right'
-    // iconHolder.style.textAlign = 'right'
     div.classList.add('menuItem')
     div.id = `menu-item-${menuItemIndex}`
     div.appendChild(createName(ele.name))
@@ -184,9 +256,12 @@
       //add to array
       myCart.push({name:ele.name, price:ele.price})
       // empty orderSection
-      orderSection.innerHTML = ''
+      order.innerHTML = ''
       // rerender orderSection
-      orderSection.append(renderCart(myCart))
+      order.appendChild(renderCart(myCart))
+      orderSection.appendChild(orderButtons)
+
+      localStorage.setItem('currentOrder', JSON.stringify(myCart))
     })
     div.addEventListener('click', function(event){
       const element = {id:menuItemIndex, name:ele.name, img: ele.img, desc: ele.desc, type: ele.type, price:ele.price}
@@ -210,15 +285,6 @@
 
     return div
   })
-  flameButton.addEventListener("click", function(event){
-    if (flameButton.classList.contains('off')){
-      flameButton.classList.add('on')
-      flameButton.classList.remove('off')
-    } else if (flameButton.classList.contains('on')){
-      flameButton.classList.add('off')
-      flameButton.classList.remove('on')
-    }
-  })
   spawnItems()
 // row creation
 function spawnItems(){
@@ -236,7 +302,6 @@ function spawnItems(){
 
 function renderCart(myCart){
   const cart = document.createElement('div')
-
   const quantity = Object.values(myCart.reduce((acc, ele) => {
     if(acc.hasOwnProperty(ele.name)){
       acc[ele.name].quantity += 1
@@ -315,12 +380,15 @@ function renderCart(myCart){
 
 function makeDescribedItem(item){
   const wideItem = document.createElement('div')
+  const nameAndPrice = document.createElement('p')
+  // nameAndPrice.classList.add('row')
+  nameAndPrice.appendChild(createName(item.name))
+  nameAndPrice.appendChild(createPrice(item.price))
   wideItem.setAttribute('data-id', item.id)
   wideItem.classList.add('current')
   wideItem.style.width = '100%'
   wideItem.appendChild(addImg(item.img))
-  wideItem.appendChild(createName(item.name))
-  wideItem.appendChild(createPrice(item.price))
+  wideItem.appendChild(nameAndPrice)
   wideItem.appendChild(createType(item.type))
   wideItem.appendChild(createDesc(item.desc))
   if (item.icon1 === true) {

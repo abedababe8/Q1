@@ -1,4 +1,4 @@
-const myCart = []
+let myCart = []
 
 const itemData = [
   { name: 'Penne Rigatta',

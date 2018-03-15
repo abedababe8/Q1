@@ -16,7 +16,17 @@
     <div class="header">
     </div>
     <div class="row interactive">
-      <div class="order col-3">
+      <div class="orderSection col-3">
+        <div class="order"></div>
+        <form class="orderFavoriteForm hide">
+          <input class="orderFavoriteInput hide" type="text">
+        </form>
+        <div class="orderButtons row">
+        <a class="star btn btn-outline-dark full" href="#" role="button"><span><i class="far fa-star"></i></span></a>
+        <a type="submit" class="submit hide btn btn-outline-dark full" href="#" role="button">Submit</a>
+
+        <a class="clear btn btn-outline-dark full" href="#" role="button">Clear Order</a>
+      </div>
       </div>
       <div class="menu-container col-7 row">
       </div>
@@ -28,6 +38,7 @@
           <a class="btn btn-outline-warning full" href="#" role="button"><span><i class="fab fa-pagelines wheat"></i></span></a>
         </div>
         <div class="bottom-btns">
+          <a class="favorites btn btn-outline-dark full" href="#" role="button">Favorites</a>
           <a class="all btn btn-outline-dark full" href="#" role="button">All</a>
           <a class="entree btn btn-outline-dark full" href="#" role="button">Entrees</a>
           <a class="app btn btn-outline-dark full" href="#" role="button">Appetizers</a>
@@ -56,6 +67,10 @@
     <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
   crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
