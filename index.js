@@ -113,7 +113,7 @@ let currentFavorite = false
     favoriteBtnHolder.classList.remove('hide')
     for (var numOfSaved = 0; numOfSaved < storedFavorites.length; numOfSaved++){
       const favoriteBtn = document.createElement('a')
-      favoriteBtn.classList.add('favoriteButton', 'row', 'btn', 'btn-outline-dark', 'full')
+      favoriteBtn.classList.add('favoriteButton', 'row', 'btn', 'btn-outline-light', 'full')
       favoriteBtn.style.width = '100%'
       favoriteBtn.setAttribute('href', '#')
       favoriteBtn.setAttribute('role', 'button')
